@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Calendar,
   Mail,
@@ -10,6 +10,13 @@ import {
   Utensils,
   TreePine,
 } from "lucide-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import Link from "next/link";
 import Image from "next/image";
 import Navigation from "@/components/Navigation";
@@ -222,32 +229,32 @@ const Index = () => {
                         <Users className="h-6 w-6 text-orange-600" />
                       </div>
                       <div className="font-medium text-stone-800">
-                        4 Chambres
+                        1 Chambres ,
                       </div>
-                      <div className="text-sm text-stone-600">8 personnes</div>
+                      <div className="text-sm text-stone-600">4 personnes</div>
                     </div>
                     <div className="text-center">
                       <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-3">
                         <TreePine className="h-6 w-6 text-orange-600" />
                       </div>
-                      <div className="font-medium text-stone-800">Parc</div>
-                      <div className="text-sm text-stone-600">5 hectares</div>
+                      <div className="font-medium text-stone-800">
+                        Randonné et Balade
+                      </div>
+                      <div className="text-sm text-stone-600">
+                        Le Pays des Collines
+                      </div>
                     </div>
                     <div className="text-center">
                       <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-3">
                         <Car className="h-6 w-6 text-orange-600" />
                       </div>
-                      <div className="font-medium text-stone-800">Garage</div>
-                      <div className="text-sm text-stone-600">3 véhicules</div>
+                      <div className="font-medium text-stone-800">Parking</div>
                     </div>
                     <div className="text-center">
                       <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-3">
                         <Utensils className="h-6 w-6 text-orange-600" />
                       </div>
                       <div className="font-medium text-stone-800">Cuisine</div>
-                      <div className="text-sm text-stone-600">
-                        Traditionnelle
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -259,6 +266,31 @@ const Index = () => {
                   </Button>
                 </Link>
               </CardContent>
+              <Card className="my-32">
+                <CardContent className="py-8 ">
+                  <CardHeader>
+                    <CardTitle className="items-center">
+                      <h1>Galerie d&apos;images</h1>
+                    </CardTitle>
+                  </CardHeader>
+                  <Carousel>
+                    <CarouselContent>
+                      <CarouselItem>
+                        <Image
+                          src="/cuisine.jpeg"
+                          alt="cuisine"
+                          height={500}
+                          width={500}
+                        />
+                      </CarouselItem>
+                      <CarouselItem>...</CarouselItem>
+                      <CarouselItem>...</CarouselItem>
+                    </CarouselContent>
+                    <CarouselPrevious />
+                    <CarouselNext />
+                  </Carousel>
+                </CardContent>
+              </Card>
             </Card>
           </div>
         </div>
