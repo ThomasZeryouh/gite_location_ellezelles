@@ -18,7 +18,7 @@ async function setupAdmin() {
     }
 
     // Créer l'admin avec mot de passe hashé
-    const hashedPassword = await bcrypt.hash("admin123", 12);
+    const hashedPassword = await bcrypt.hash("giteellezelles.2025", 12);
 
     const admin = await prisma.user.create({
       data: {

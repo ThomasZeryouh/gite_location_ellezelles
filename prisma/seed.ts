@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 async function main() {
   // Créer l'utilisateur admin par défaut
-  const hashedPassword = await bcrypt.hash("admin123", 12);
+  const hashedPassword = await bcrypt.hash("giteellezeles2025.be", 12);
 
   const admin = await prisma.user.upsert({
     where: { username: "admin" },

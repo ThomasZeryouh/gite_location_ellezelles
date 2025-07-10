@@ -7,10 +7,10 @@ import { Button } from "@/components/ui/button";
 
 const PropertyCarousel = () => {
   const images = [
-    { src: "/9.jpeg", alt: "Vue extérieure de la demeure" },
-    { src: "/10.jpeg", alt: "Salon principal" },
-    { src: "/11.jpeg", alt: "Chambre principale" },
-    { src: "/12.jpeg", alt: "Cuisine traditionnelle" },
+    { src: "/10.jpeg", alt: "Vue extérieure de la demeure" },
+    { src: "/11.jpeg", alt: "Salon principal" },
+    { src: "/12.jpeg", alt: "Chambre principale" },
+    { src: "/salon.jpeg", alt: "Cuisine traditionnelle" },
     { src: "/chambre.webp", alt: "Jardins et parc" },
   ];
 

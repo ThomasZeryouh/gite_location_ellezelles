@@ -43,7 +43,7 @@ const Index = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/40" />
 
         <div className="relative z-10 text-center text-white px-6 max-w-5xl mx-auto">
-          <div className="mb-8">
+          <div className="mb-8 p-7 bg-green-900/70 rounded-xl">
             <p className="text-lg font-light tracking-wider text-orange-200 mb-4">
               COLLECTION CAMPAGNE
             </p>
@@ -277,7 +277,7 @@ const Index = () => {
                     <CarouselContent>
                       <CarouselItem>
                         <Image
-                          src="/cuisine.jpeg"
+                          src="/12.jpeg"
                           alt="cuisine"
                           height={500}
                           width={500}
@@ -307,10 +307,6 @@ const Index = () => {
               Demande de Renseignements
             </h2>
             <div className="w-16 h-0.5 bg-orange-500 mx-auto mb-6"></div>
-            <p className="text-stone-600 text-lg max-w-2xl mx-auto">
-              Notre équipe de conseillers est à votre disposition pour
-              personnaliser votre séjour d&apos;exception
-            </p>
           </div>
           <ContactForm />
         </div>
@@ -325,9 +321,7 @@ const Index = () => {
                 Les Belles Collines
               </h3>
               <p className="text-stone-400 leading-relaxed">
-                Collection privée de demeures d&apos;exception en Bourgogne, où
-                l&apos;art de vivre français rencontre l&apos;authenticité du
-                terroir.
+                Gite rural dans le pays des collines à Ellezelles en Belgique .
               </p>
             </div>
             <div>
@@ -343,22 +337,8 @@ const Index = () => {
                 </div>
                 <div className="flex items-center space-x-3">
                   <MapPin className="h-4 w-4 text-orange-400" />
-                  <span>Bourgogne, France</span>
+                  <span>Ellezelles, Belgique</span>
                 </div>
-              </div>
-            </div>
-            <div>
-              <h4 className="font-medium text-white mb-6">Informations</h4>
-              <div className="space-y-3 text-stone-400">
-                <p>Mentions légales</p>
-                <p>Conditions générales</p>
-                <p>Politique de confidentialité</p>
-                <Link
-                  href="/admin/login"
-                  className="block text-stone-600 hover:text-stone-400 transition-colors text-xs opacity-50 hover:opacity-100"
-                >
-                  •
-                </Link>
               </div>
             </div>
           </div>

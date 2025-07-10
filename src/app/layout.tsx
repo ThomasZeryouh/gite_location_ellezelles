@@ -6,8 +6,8 @@ import { Toaster } from "@/components/ui/sonner";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Les Belles Collines - Bourgogne",
-  description: "Collection privée de demeures d'exception en Bourgogne",
+  title: "Les Belles Collines - Ellezelles",
+  description: "Une demeure dans la campagne du Pays des Collines",
 };
 
 export default function RootLayout({

@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Lock, User } from "lucide-react";
 import { toast } from "sonner";
+import { SimpleAuth } from "@/lib/simple-auth";
 
 const AdminLogin = () => {
   const router = useRouter();
@@ -22,6 +23,8 @@ const AdminLogin = () => {
     setIsLoading(true);
 
     try {
+      console.log("🔄 Tentative de connexion...");
+
       const response = await fetch("/api/auth/login", {
         method: "POST",
         headers: {
@@ -30,20 +33,39 @@ const AdminLogin = () => {
         body: JSON.stringify(credentials),
       });
 
+      console.log("📡 Réponse API:", response.status);
       const data = await response.json();
+      console.log("📋 Data reçue:", data);
 
       if (data.success) {
-        // Stocker le token JWT
-        localStorage.setItem("adminToken", data.token);
-        localStorage.setItem("adminUser", JSON.stringify(data.user));
+        console.log(
+          "✅ Login réussi, token:",
+          data.token ? "présent" : "manquant"
+        );
+
+        // Sauvegarder le token avec SimpleAuth
+        SimpleAuth.setToken(data.token);
+
+        // Vérifier que le token est bien sauvegardé
+        console.log(
+          "💾 Token sauvegardé:",
+          SimpleAuth.getToken() ? "✅" : "❌"
+        );
+        console.log("🍪 Cookies après sauvegarde:", document.cookie);
 
         toast.success("Connexion réussie !");
-        router.push("/admin/dashboard");
+
+        // Attendre un peu avant la redirection
+        setTimeout(() => {
+          console.log("🔄 Redirection vers /admin/dashboard");
+          router.push("/admin/dashboard");
+        }, 100);
       } else {
+        console.log("❌ Login échoué:", data.message);
         toast.error(data.message || "Identifiants incorrects");
       }
     } catch (error) {
-      console.error("Erreur de connexion:", error);
+      console.error("💥 Erreur de connexion:", error);
       toast.error("Erreur de connexion au serveur");
     }
 

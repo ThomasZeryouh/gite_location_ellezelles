@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+import { SignJWT } from "jose";
 
 export async function POST(request: Request) {
   try {
@@ -45,12 +45,20 @@ export async function POST(request: Request) {
       );
     }
 
-    // Créer le JWT token
-    const token = jwt.sign(
-      { userId: user.id, username: user.username, role: user.role },
-      process.env.JWT_SECRET || "fallback-secret",
-      { expiresIn: "24h" }
+    // Créer le JWT token avec jose
+    const secret = new TextEncoder().encode(
+      process.env.JWT_SECRET || "fallback-secret"
     );
+
+    const token = await new SignJWT({
+      userId: user.id,
+      username: user.username,
+      role: user.role,
+    })
+      .setProtectedHeader({ alg: "HS256" })
+      .setIssuedAt()
+      .setExpirationTime("24h")
+      .sign(secret);
 
     return NextResponse.json({
       message: "Connexion réussie",

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -37,6 +37,7 @@ import {
 import { format, parseISO, areIntervalsOverlapping, isSameDay } from "date-fns";
 import { fr } from "date-fns/locale";
 import { toast } from "sonner";
+import { SimpleAuth } from "@/lib/simple-auth"; // Ajustez le chemin selon votre structure
 
 // Type pour les réservations depuis l'API
 interface ApiReservation {
@@ -83,22 +84,21 @@ const AdminDashboard = () => {
     commentaire: "",
   });
 
-  // Vérification de l'authentification et chargement des données
-  useEffect(() => {
-    const token = localStorage.getItem("adminToken");
-    if (!token) {
-      router.push("/admin/login");
-      return;
-    }
-
-    loadReservations();
-  }, [router]);
-
   // Charger les réservations depuis l'API
-  const loadReservations = async () => {
+  const loadReservations = useCallback(async () => {
     try {
       setLoading(true);
-      const response = await fetch("/api/reservations");
+      const response = await fetch("/api/reservations", {
+        headers: SimpleAuth.getHeaders(),
+      });
+
+      if (response.status === 401) {
+        // Token invalide, rediriger vers login
+        SimpleAuth.logout();
+        router.push("/admin/login");
+        return;
+      }
+
       const data = await response.json();
 
       if (data.success) {
@@ -125,11 +125,20 @@ const AdminDashboard = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [router]);
+
+  // Vérification de l'authentification et chargement des données
+  useEffect(() => {
+    // Attendre que le composant soit monté côté client
+    if (!SimpleAuth.isAuthenticated()) {
+      router.push("/admin/login");
+      return;
+    }
+    loadReservations();
+  }, [router, loadReservations]);
 
   const handleLogout = () => {
-    localStorage.removeItem("adminToken");
-    localStorage.removeItem("adminUser");
+    SimpleAuth.logout();
     toast.success("Déconnexion réussie");
     router.push("/admin/login");
   };
@@ -218,16 +227,23 @@ const AdminDashboard = () => {
         // Modifier une réservation existante
         response = await fetch(`/api/reservations/${editingReservation.id}`, {
           method: "PUT",
-          headers: { "Content-Type": "application/json" },
+          headers: SimpleAuth.getHeaders(),
           body: JSON.stringify(formData),
         });
       } else {
         // Créer une nouvelle réservation
         response = await fetch("/api/reservations", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: SimpleAuth.getHeaders(),
           body: JSON.stringify(formData),
         });
+      }
+
+      if (response.status === 401) {
+        // Token invalide, rediriger vers login
+        SimpleAuth.logout();
+        router.push("/admin/login");
+        return;
       }
 
       const data = await response.json();
@@ -254,7 +270,15 @@ const AdminDashboard = () => {
     try {
       const response = await fetch(`/api/reservations/${id}`, {
         method: "DELETE",
+        headers: SimpleAuth.getHeaders(),
       });
+
+      if (response.status === 401) {
+        // Token invalide, rediriger vers login
+        SimpleAuth.logout();
+        router.push("/admin/login");
+        return;
+      }
 
       const data = await response.json();
 
@@ -526,9 +550,7 @@ const AdminDashboard = () => {
               <CardTitle>
                 Réservations{" "}
                 {selectedDate &&
-                  `pour le ${format(selectedDate, "dd MMMM yyyy", {
-                    locale: fr,
-                  })}`}
+                  `pour le ${format(selectedDate, "dd MMMM yyyy", { locale: fr })}`}
               </CardTitle>
             </CardHeader>
             <CardContent>

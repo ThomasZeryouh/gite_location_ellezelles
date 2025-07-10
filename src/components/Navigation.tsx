@@ -22,6 +22,12 @@ const Navigation = () => {
               Accueil
             </Link>
             <Link
+              href="/disponibilite"
+              className="text-stone-700 hover:text-orange-600 transition-colors font-medium"
+            >
+              Disponibilités
+            </Link>
+            <Link
               href="/contact"
               className="text-stone-700 hover:text-orange-600 transition-colors font-medium"
             >

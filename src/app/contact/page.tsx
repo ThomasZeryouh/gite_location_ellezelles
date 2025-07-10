@@ -106,27 +106,6 @@ const Contact = () => {
                     <p className="text-gray-600">+33 1 23 45 67 89</p>
                   </div>
                 </div>
-
-                <div className="bg-gradient-to-r from-blue-50 to-green-50 p-6 rounded-lg">
-                  <h3 className="font-semibold text-gray-900 mb-2">
-                    Horaires d&apos;ouverture
-                  </h3>
-                  <div className="space-y-1 text-sm text-gray-600">
-                    <p>Lundi - Vendredi : 9h00 - 18h00</p>
-                    <p>Samedi : 9h00 - 16h00</p>
-                    <p>Dimanche : 10h00 - 14h00</p>
-                  </div>
-                </div>
-
-                <div className="bg-blue-600 text-white p-6 rounded-lg">
-                  <h3 className="font-semibold mb-2">
-                    Réponse Rapide Garantie
-                  </h3>
-                  <p className="text-sm text-blue-100">
-                    Nous nous engageons à répondre à votre demande dans les 2
-                    heures pendant nos horaires d&apos;ouverture.
-                  </p>
-                </div>
               </CardContent>
             </Card>
 

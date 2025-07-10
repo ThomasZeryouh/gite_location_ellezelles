@@ -342,7 +342,7 @@ const Reservation = () => {
                     Location Gîte de campagne
                   </h3>
                   <p className="text-sm text-gray-600">
-                    Appartement 2 chambres • 4 personnes
+                    Appartement 1 chambres • 4 personnes
                   </p>
                 </div>
 
