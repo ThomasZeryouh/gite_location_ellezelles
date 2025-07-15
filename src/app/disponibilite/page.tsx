@@ -154,7 +154,7 @@ const Disponibilite = () => {
             </p>
 
             {/* Boutons d'action */}
-            <div className="flex justify-center gap-4 mb-6">
+            <div className="flex justify-center gap-3 mb-6 px-3">
               <Button
                 onClick={goToToday}
                 variant="outline"
@@ -175,7 +175,7 @@ const Disponibilite = () => {
 
               <Link href="/reservation">
                 <Button className="bg-blue-600 hover:bg-blue-700">
-                  Faire une réservation
+                  Réservation
                 </Button>
               </Link>
             </div>

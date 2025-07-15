@@ -160,7 +160,7 @@ const Reservation = () => {
                             <CalendarIcon className="mr-2 h-4 w-4" />
                             {checkIn
                               ? format(checkIn, "PPP", { locale: fr })
-                              : "Sélectionner une date"}
+                              : "Sélectionner"}
                           </Button>
                         </PopoverTrigger>
                         <PopoverContent className="w-auto p-0" align="start">
@@ -195,7 +195,7 @@ const Reservation = () => {
                             <CalendarIcon className="mr-2 h-4 w-4" />
                             {checkOut
                               ? format(checkOut, "PPP", { locale: fr })
-                              : "Sélectionner une date"}
+                              : "Sélectionner"}
                           </Button>
                         </PopoverTrigger>
                         <PopoverContent className="w-auto p-0" align="start">

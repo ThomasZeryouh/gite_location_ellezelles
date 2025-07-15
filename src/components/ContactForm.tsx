@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-
+import { toast } from "sonner";
 const ContactForm = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -13,9 +13,36 @@ const ContactForm = () => {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Logique de soumission du formulaire
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        toast.success(data.message);
+        // Reset form
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+
+          message: "",
+        });
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.error("Erreur:", error);
+      toast.error("Erreur lors de l'envoi du message. Veuillez réessayer.");
+    }
     console.log("Form submitted:", formData);
   };
 
